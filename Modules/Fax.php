@@ -76,16 +76,20 @@ class Fax extends ModuleBase
 
 			// Format AJAX
 			$rows = [];
-			foreach ($data_cmd['global'] as $name => $value)
-			{
-				$rows[] = ['module' => 'Global', 'key' 	 => $name, 'val' 	 => $value];
+			if (isset($data_cmd['global'])) {
+				foreach ($data_cmd['global'] as $name => $value)
+				{
+					$rows[] = ['module' => 'Global', 'key' 	 => $name, 'val' 	 => $value];
+				}
 			}
 
-			foreach ($data_cmd['modules'] as $moduleName => $moduleVal)
-			{
-				foreach ($moduleVal as $propertyName => $propertyValue)
+			if (isset($data_cmd['modules'])) {
+				foreach ($data_cmd['modules'] as $moduleName => $moduleVal)
 				{
-					$rows[] = ['module' => $moduleName, 'key' 	 => $propertyName, 'val' 	 => $propertyValue];
+					foreach ($moduleVal as $propertyName => $propertyValue)
+					{
+						$rows[] = ['module' => $moduleName, 'key' 	 => $propertyName, 'val' 	 => $propertyValue];
+					}
 				}
 			}
 
